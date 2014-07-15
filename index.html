@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Statechart Example</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <script data-require="angular.js@1.2.x" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js" data-semver="1.2.17"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">    
+    <script src="statechart.js"></script>
+    <script src="app.js"></script>
+    <style>
+      body { padding: 20px }
+      ul.nav { padding-bottom: 10px; }
+    </style>
+  </head>
+
+  <body ng-controller="MainCtrl">
+    <ul class="nav nav-pills">
+      <li ng-class="{active: $state.mainElement === 'X'}"><a href="#" ng-click="event('selectTab', 'X')">X</a></li>
+      <li ng-class="{active: $state.mainElement === 'P'}"><a href="#" ng-click="event('selectTab', 'P')">P</a></li>
+    </ul>  
+  
+    <div class="panel panel-default">
+      <div class="panel-body" ng-switch="$state.mainElement">
+        <div ng-switch-when="X">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" ng-class="{active: $state.selectedOption === 'Y'}" ng-click="event('selectOption', 'Y')">Y</button>
+            <button type="button" class="btn btn-default" ng-class="{active: $state.selectedOption === 'Z'}" ng-click="event('selectOption', 'Z')">Z</button>
+          </div>
+        </div>
+        <div ng-switch-when="P">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" ng-class="{active: $state.selectedP1Option === 'A'}" ng-click="event('selectP1Option', 'A')">A</button>
+            <button type="button" class="btn btn-default" ng-class="{active: $state.selectedP1Option === 'B'}" ng-click="event('selectP1Option', 'B')">B</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" ng-class="{active: $state.selectedP2Option === 'C'}" ng-click="event('selectP2Option', 'C')">C</button>
+            <button type="button" class="btn btn-default" ng-class="{active: $state.selectedP2Option === 'D'}" ng-click="event('selectP2Option', 'D')">D</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" ng-class="{active: $state.selectedP3Option === 'E'}" ng-click="event('selectP3Option', 'E')">E</button>
+            <button type="button" class="btn btn-default" ng-class="{active: $state.selectedP3Option === 'F'}" ng-click="event('selectP3Option', 'F')">F</button>
+          </div>
+          <a href="#" class="btn btn-default" ng-click="event('toggle')">Toggle</a>
+        </div>
+      </div>
+      <div class="panel-footer">
+        Current state: <code>{{currentState()}}</code>
+      </div>
+    </div>
+  </body>
+
+</html>
